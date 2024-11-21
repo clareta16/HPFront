@@ -22,7 +22,23 @@ function ViewPets() {
     };
 
     fetchPets();
-  }, []); // Run once when component is mounted
+  }, []);
+   // Eliminar mascota
+   const deletePet = async (petId) => {
+    try {
+      await axios.delete(`http://localhost:8080/pets/${petId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+      // Actualitzar la llista d'animals després de la seva eliminació
+      setPets(pets.filter(pet => pet.id !== petId));  // Elimina la mascota de la llista
+      alert("Pet deleted successfully");
+    } catch (error) {
+      console.error("Error deleting pet", error);
+      alert("Error deleting pet");
+    }
+  };
 
   return (
     <div>
@@ -78,6 +94,14 @@ function ViewPets() {
                   This pet is ready to fight the Dark Lord!
                 </p>
               )}
+
+              {/* Delete Pet Button */}
+              <button
+                onClick={() => deletePet(pet.id)}
+                style={{ backgroundColor: "red", color: "white", marginTop: "10px" }}
+              >
+                Delete Pet
+              </button>
             </div>
           ))
         ) : (
@@ -86,7 +110,6 @@ function ViewPets() {
       </div>
     </div>
   );
-}
+};
 
 export default ViewPets;
-

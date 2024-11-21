@@ -1,6 +1,7 @@
 // src/components/CreatePet.jsx
 import React, { useState } from 'react';
 import { createPet } from '../api/petsService'; // Utilitza la funció de creació de mascota
+import axios from "axios";
 
 function CreatePet({ onPetCreated }) {
   const [name, setName] = useState('');
@@ -11,14 +12,31 @@ function CreatePet({ onPetCreated }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrorMessage(''); // Clear previous errors
+  
+    // Comprova que totes les dades siguin vàlides
+    if (!petType || !name || !colour) {
+      setErrorMessage('All fields are required');
+      return;
+    }
+  
     try {
-      const response = await createPet({ petType, name, colour }); // Crida la funció de creació de mascota
-      onPetCreated(response);
-      alert('Pet created successfully');
+      // Fer la crida a l'API per crear la mascota
+      const response = await axios.post(
+        "http://localhost:8080/pets", // La URL de l'API per crear una mascota
+        { petType, name, colour },    // Les dades de la nova mascota
+        
+    
+      );
+  
+      onPetCreated(response.data);  // Passar la resposta a la funció onPetCreated per actualitzar el component
+      alert('Pet created successfully'); // Missatge d'èxit
     } catch (error) {
-      setErrorMessage('Failed to create pet: ' + error.message);
+      console.error('Error creating pet:', error);  // Mostrar l'error complet per depurar
+      setErrorMessage('Failed to create pet: ' + (error.response ? error.response.data : error.message));
     }
   };
+  
+  
 
   return (
     <div>
