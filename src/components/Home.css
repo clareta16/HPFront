@@ -1,0 +1,82 @@
+/* Home.css */
+
+/* Container general */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;  /* Ajustat per fer que el contingut comenci a dalt */
+  height: 100vh; /* Centrar verticalment */
+  background-color: #282c34;
+  color: white;
+  padding-top: 20px; /* Afegim espai a la part superior per evitar que el títol estigui just contra la part superior de la pantalla */
+}
+
+.welcome-title {
+  font-family: 'Reenie Beanie', cursive;  /* Tipografia Harry Potter */
+  font-size: 3rem;
+  text-align: center;
+  color: #f5c200; /* Daurat per la tipografia */
+  margin-bottom: 20px; /* Afegim una mica d'espai per sota del títol */
+  animation: fadeIn 2s ease-in-out;  /* Animació de desvaniment */
+}
+
+/* Botons */
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.action-btn {
+  padding: 10px 20px;
+  background-color: #f5c200;
+  color: white;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.action-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Els personatges de Harry Potter (només botons) */
+.characters-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.hp-character {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.hp-character button {
+  background-color: #f5c200;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.hp-character button:hover {
+  transform: scale(1.1);
+}
+
+/* Animació per al títol */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

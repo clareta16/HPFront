@@ -20,6 +20,24 @@ body {
     aspect-ratio: 1/1;
     border-radius: 20%;
     box-shadow: 0 1vmin 4vmin;
+    position: relative; /* Assegura't que els botons es puguin posicionar sobre */
+  }
+  
+  .character-button {
+    position: absolute;
+    top: 10px;  /* Situa el botó una mica per sobre de la icona */
+    background-color: #f5c200;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .character-button:hover {
+    transform: scale(1.1);
   }
   
   .hp-character.griffindor {
@@ -61,8 +79,7 @@ body {
     color: #0006;
   }
   
-  
-.hp-character.ravenclaw {
+  .hp-character.ravenclaw {
     background:
       radial-gradient(farthest-side, #fff 90%, #0000 0) 24% 45% / 5% 5%,
       radial-gradient(farthest-side, #fff 90%, #0000 0) 70% 45% / 5% 5%,
@@ -83,7 +100,6 @@ body {
     background-repeat: no-repeat;
     color: #2366;
   }
-
   
   .hp-character.hufflepuff {
     background:
@@ -106,4 +122,5 @@ body {
     background-repeat: no-repeat;
     color: #0005;
   }
+  
   

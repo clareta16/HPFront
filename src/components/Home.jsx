@@ -1,6 +1,6 @@
-// src/components/Home.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Importa useNavigate
+import './Home.css';  // Assegura't d'importar el teu arxiu CSS per l'animació i el disseny
 
 function Home() {
   const navigate = useNavigate(); // Canvia useHistory per useNavigate
@@ -16,14 +16,16 @@ function Home() {
   };
 
   return (
-    <div>
-      <h1>Welcome to Hogwarts!</h1>
-      <button onClick={createPet} style={{ margin: '10px' }}>
-        Create a Pet
-      </button>
-      <button onClick={viewPets} style={{ margin: '10px' }}>
-        View Your Pets
-      </button>
+    <div className="home-container">
+      <h1 className="welcome-title">Welcome to Hogwarts!</h1>
+      <div className="buttons-container">
+        <button onClick={createPet} className="action-btn">
+          Create a Pet
+        </button>
+        <button onClick={viewPets} className="action-btn">
+          View Your Pets
+        </button>
+      </div>
     </div>
   );
 }
