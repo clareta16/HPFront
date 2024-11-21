@@ -6,8 +6,12 @@ import ViewPets from "./components/ViewPets";
 import AuthPage from './components/Auth/AuthPage';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
+import HarryPotterCharacters from './HarryPotterCharacters'; 
+import './styles.css';
 
 function App() {
+
+ 
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -32,6 +36,18 @@ function App() {
 
   return (
     <div className="App">
+      
+       <HarryPotterCharacters /> 
+       <div className="container">
+        <div className="hp-character griffindor" role="img" aria-label="Harry Potter">
+          <button onClick={() => navigate("/create-pet")} className="create-pet-btn">Create Pet</button>
+        </div>
+        <div className="hp-character slytherin" role="img" aria-label="Draco Malfoy"></div>
+        <div className="hp-character ravenclaw" role="img" aria-label="Luna Lovegood">
+          <button onClick={() => navigate("/view-pets")} className="view-pets-btn">View All Pets</button>
+        </div>
+        <div className="hp-character hufflepuff" role="img" aria-label="Cedric Diggory"></div>
+      </div>
       <nav>
         <button onClick={() => navigate("/home")} style={{ marginRight: '10px' }}>Home</button>
         {isLoggedIn ? (
@@ -64,4 +80,4 @@ function App() {
   );
 }
 
-export default App;
+export default App

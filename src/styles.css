@@ -1,0 +1,19 @@
+/* styles.css */
+
+/* Estils generals per les icones dels personatges */
+.hp-character {
+    background: #ddd; /* Fons gris clar */
+    border-radius: 12px; /* Arrodonir les cantonades */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombratge suau */
+    transition: transform 0.3s ease-in-out; /* Anima la transformació */
+    width: 150px; /* Amplada de la imatge */
+    height: 150px; /* Alçada de la imatge */
+    display: inline-block; /* Perquè es mostrin com elements en línia */
+    margin: 10px; /* Espai entre les icones */
+  }
+  
+  /* Quan l'usuari passa el ratolí per sobre de la icona */
+  .hp-character:hover {
+    transform: scale(1.1); /* Augmentar la mida de la icona quan se'n passa per sobre */
+  }
+  

@@ -25,7 +25,6 @@ function CreatePet({ onPetCreated }) {
         "http://localhost:8080/pets", // La URL de l'API per crear una mascota
         { petType, name, colour },    // Les dades de la nova mascota
         
-    
       );
   
       onPetCreated(response.data);  // Passar la resposta a la funció onPetCreated per actualitzar el component
