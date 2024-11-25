@@ -6,8 +6,8 @@
     border-radius: 12px; /* Arrodonir les cantonades */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombratge suau */
     transition: transform 0.3s ease-in-out; /* Anima la transformació */
-    width: 150px; /* Amplada de la imatge */
-    height: 150px; /* Alçada de la imatge */
+    width: 100px; /* Amplada de la imatge */
+    height: 100px; /* Alçada de la imatge */
     display: inline-block; /* Perquè es mostrin com elements en línia */
     margin: 10px; /* Espai entre les icones */
   }
@@ -16,4 +16,59 @@
   .hp-character:hover {
     transform: scale(1.1); /* Augmentar la mida de la icona quan se'n passa per sobre */
   }
+
+  /* Container for each pet's information and GIF */
+.pet-container {
+    border: 2px solid #ddd; /* Light border */
+    border-radius: 12px; /* Rounded corners */
+    padding: 20px; /* Spacing inside the box */
+    margin: 15px; /* Space between pet boxes */
+    background-color: #f9f9f9; /* Light background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* On hover, make the container stand out */
+.pet-container:hover {
+    transform: scale(1.02); /* Slight enlargement */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+}
+
+/* Center and resize the GIF */
+.pet-gif {
+    display: block;
+    margin: 0 auto; /* Center the image */
+    max-width: 100%; /* Make sure it doesn't exceed its container */
+    height: auto; /* Keep aspect ratio */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add some shadow */
+}
+
+/* Buttons for pet actions */
+.pet-buttons button {
+    background-color: #4caf50; /* Green button color */
+    color: white; /* Text color */
+    padding: 10px 15px; /* Button size */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    margin: 5px; /* Space between buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 14px; /* Font size */
+    transition: background-color 0.3s ease;
+}
+
+/* Change color on hover */
+.pet-buttons button:hover {
+    background-color: #45a049; /* Slightly darker green */
+}
+
+/* Delete button (different color for emphasis) */
+.pet-buttons .delete-button {
+    background-color: #f44336; /* Red color */
+}
+
+.pet-buttons .delete-button:hover {
+    background-color: #d32f2f; /* Darker red */
+}
+
   

@@ -17,8 +17,9 @@
   font-size: 3rem;
   text-align: center;
   color: #f5c200; /* Daurat per la tipografia */
-  margin-bottom: 20px; /* Afegim una mica d'espai per sota del títol */
+  margin-bottom: 80px; /* Afegim una mica d'espai per sota del títol */
   animation: fadeIn 2s ease-in-out;  /* Animació de desvaniment */
+
 }
 
 /* Botons */

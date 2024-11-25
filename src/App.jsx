@@ -57,7 +57,7 @@ function App() {
         <button onClick={() => navigate("/home")} style={{ marginRight: '10px' }}>Home</button>
         {isLoggedIn ? (
           <>
-            <button onClick={handleLogout}>Log Out</button>
+            <button onClick={handleLogout}>Log out</button>
           </>
         ) : (
           <>

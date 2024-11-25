@@ -18,14 +18,7 @@ function Home() {
   return (
     <div className="home-container">
       <h1 className="welcome-title">Welcome to Hogwarts!</h1>
-      <div className="buttons-container">
-        <button onClick={createPet} className="action-btn">
-          Create a Pet
-        </button>
-        <button onClick={viewPets} className="action-btn">
-          View Your Pets
-        </button>
-      </div>
+      
     </div>
   );
 }

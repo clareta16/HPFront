@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { getAllPets, deletePet, interactWithPet } from "../api/petsService"; // Correct path for petService
+import "../styles.css";
 
 function ViewPets() {
   const [pets, setPets] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    // Fetch all pets (both user-owned and default ones)
+    // Fetch all pets from the backend
     const fetchPets = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:8080/pets", {
-          headers: {
-            Authorization: `Bearer ${token}`, // Pass token to authenticate user
-          },
-        });
-        setPets(response.data);  // Store pets data
+        const response = await getAllPets(); // Call the service to get all pets
+        setPets(
+          response.data.map((pet) => ({
+            ...pet,
+            // Update the GIF path to include pets/ folder
+            currentGif: `/assets/pets/${pet.petType.toLowerCase()}_idle.gif`,
+          }))
+        );
       } catch (error) {
         setErrorMessage("Failed to fetch pets: " + error.message);
       }
@@ -23,20 +25,40 @@ function ViewPets() {
 
     fetchPets();
   }, []);
-   // Eliminar mascota
-   const deletePet = async (petId) => {
+
+  // Function to handle pet actions
+  const handlePetAction = async (petId, action) => {
     try {
-      await axios.delete(`http://localhost:8080/pets/${petId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-      });
-      // Actualitzar la llista d'animals després de la seva eliminació
-      setPets(pets.filter(pet => pet.id !== petId));  // Elimina la mascota de la llista
-      alert("Pet deleted successfully");
+      const response = await interactWithPet(petId, action); // Call the service for the action
+      const updatedPet = response.data;
+
+      // Update the pet's state with the new data and corresponding GIF
+      setPets((prevPets) =>
+        prevPets.map((pet) =>
+          pet.id === petId
+            ? {
+                ...pet,
+                ...updatedPet,
+                currentGif: `/assets/pets/${pet.petType.toLowerCase()}_${action}.gif`, // Update path for action-based GIF
+              }
+            : pet
+        )
+      );
     } catch (error) {
-      console.error("Error deleting pet", error);
-      alert("Error deleting pet");
+      console.error(`Error performing ${action} action on pet:`, error);
+      alert(`Failed to perform ${action} action.`);
+    }
+  };
+
+  // Function to delete a pet
+  const handleDeletePet = async (petId) => {
+    try {
+      await deletePet(petId); // Delete the pet via the service
+      setPets((prevPets) => prevPets.filter((pet) => pet.id !== petId)); // Remove the pet from state
+      alert("Pet deleted successfully.");
+    } catch (error) {
+      console.error("Error deleting pet:", error);
+      alert("Failed to delete pet.");
     }
   };
 
@@ -47,11 +69,18 @@ function ViewPets() {
       <div>
         {pets.length > 0 ? (
           pets.map((pet) => (
-            <div key={pet.id} style={{ marginBottom: "20px" }}>
+            <div className="pet-container" key={pet.id}>
               <h3>{pet.name}</h3>
               <p>Type: {pet.petType}</p>
               <p>Colour: {pet.colour}</p>
-              
+
+              {/* Pet GIF */}
+              <img
+                src={pet.currentGif}
+                alt={`${pet.petType} - ${pet.name}`}
+                className="pet-gif"
+              />
+
               {/* Hunger Level */}
               <div>
                 <label>Hunger Level: {pet.hungryLevel}%</label>
@@ -61,7 +90,7 @@ function ViewPets() {
                   style={{ width: "100%" }}
                 ></progress>
               </div>
-              
+
               {/* Sleep Level */}
               <div>
                 <label>Sleep Level: {pet.sleepLevel}%</label>
@@ -71,7 +100,7 @@ function ViewPets() {
                   style={{ width: "100%" }}
                 ></progress>
               </div>
-              
+
               {/* Combat Level */}
               <div>
                 <label>Training Level: {pet.combatLevel}%</label>
@@ -80,28 +109,31 @@ function ViewPets() {
                   max="100"
                   style={{ width: "100%" }}
                 ></progress>
-                {/* Check if the pet is ready to fight the Dark Lord */}
                 {pet.combatLevel === 100 && (
                   <p style={{ color: "green", fontWeight: "bold" }}>
                     Ready to fight the Dark Lord!
                   </p>
                 )}
               </div>
-              
-              {/* Optional: Show if the pet is ready to fight */}
-              {pet.isReadyToFightDarkLord && (
-                <p style={{ color: "red", fontWeight: "bold" }}>
-                  This pet is ready to fight the Dark Lord!
-                </p>
-              )}
 
-              {/* Delete Pet Button */}
-              <button
-                onClick={() => deletePet(pet.id)}
-                style={{ backgroundColor: "red", color: "white", marginTop: "10px" }}
-              >
-                Delete Pet
-              </button>
+              {/* Action Buttons */}
+              <div className="pet-buttons">
+                <button onClick={() => handlePetAction(pet.id, "eat")}>
+                  Eat
+                </button>
+                <button onClick={() => handlePetAction(pet.id, "sleep")}>
+                  Sleep
+                </button>
+                <button onClick={() => handlePetAction(pet.id, "fight")}>
+                  Fight
+                </button>
+                <button
+                  onClick={() => handleDeletePet(pet.id)}
+                  className="delete-button"
+                >
+                  Delete Pet
+                </button>
+              </div>
             </div>
           ))
         ) : (
@@ -110,6 +142,6 @@ function ViewPets() {
       </div>
     </div>
   );
-};
+}
 
 export default ViewPets;
