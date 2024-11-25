@@ -15,7 +15,7 @@ function ViewPets() {
           response.data.map((pet) => ({
             ...pet,
             // Update the GIF path to include pets/ folder
-            currentGif: `/assets/pets/${pet.petType.toLowerCase()}_idle.gif`,
+            currentGif: `/assets/pets/${pet.petType.toLowerCase()}_idle.gif`, // Correct path
           }))
         );
       } catch (error) {
@@ -39,7 +39,8 @@ function ViewPets() {
             ? {
                 ...pet,
                 ...updatedPet,
-                currentGif: `/assets/pets/${pet.petType.toLowerCase()}_${action}.gif`, // Update path for action-based GIF
+                // Correct path to the GIF for each action (eat, sleep, etc.)
+                currentGif: `/assets/pets/${pet.petType.toLowerCase()}_${action}.gif`,
               }
             : pet
         )

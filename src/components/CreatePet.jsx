@@ -58,8 +58,8 @@ function CreatePet({ onPetCreated }) {
             required
           >
             <option value="DEMENTOR">Dementor</option>
-            <option value="BASILISC">Basilisk</option>
             <option value="PHOENIX">Phoenix</option>
+            <option value="BASILISC">Basilisc</option>
             <option value="THESTRAL">Thestral</option>
             <option value="OWL">Owl</option>
           </select>
