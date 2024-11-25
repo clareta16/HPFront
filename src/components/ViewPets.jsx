@@ -63,6 +63,36 @@ function ViewPets() {
     }
   };
 
+  const getPastelColor = (color) => {
+    switch (color) {
+      case "RED":
+        return "rgba(255, 182, 193, 0.6)"; // Light pastel red
+      case "BLUE":
+        return "rgba(173, 216, 230, 0.6)"; // Light pastel blue
+      case "YELLOW":
+        return "rgba(255, 255, 153, 0.6)"; // Light pastel yellow
+      case "GREEN":
+        return "rgba(144, 238, 144, 0.6)"; // Light pastel green
+        default:
+          return "rgba(0, 0, 0, 0.2)";
+    }
+  };
+
+    const getProgressBarColor = (color) => {
+      switch (color) {
+        case "red":
+          return "red"; // Red progress bar
+        case "blue":
+          return "blue"; // Blue progress bar (default)
+        case "yellow":
+          return "yellow"; // Yellow progress bar
+        case "green":
+          return "green"; // Green progress bar
+        default:
+          return "blue"; // Default to blue
+      }
+    }
+  
   return (
     <div>
       <h2>Your Pets</h2>
@@ -70,7 +100,10 @@ function ViewPets() {
       <div>
         {pets.length > 0 ? (
           pets.map((pet) => (
-            <div className="pet-container" key={pet.id}>
+            <div className="pet-container" 
+            key={pet.id}
+        
+              >
               <h3>{pet.name}</h3>
               <p>Type: {pet.petType}</p>
               <p>Colour: {pet.colour}</p>
@@ -80,6 +113,10 @@ function ViewPets() {
                 src={pet.currentGif}
                 alt={`${pet.petType} - ${pet.name}`}
                 className="pet-gif"
+                style={{
+                  border: `8px solid ${getPastelColor(pet.colour)}`, // Apply colored border
+                  borderRadius: "10px", // Optional: Rounded corners for the GIF
+                }}
               />
 
               {/* Hunger Level */}
@@ -88,7 +125,10 @@ function ViewPets() {
                 <progress
                   value={pet.hungryLevel}
                   max="100"
-                  style={{ width: "100%" }}
+                  style={{ 
+                    width: "100%",
+                    color: getProgressBarColor(pet.colour),
+                   }}
                 ></progress>
               </div>
 
@@ -98,7 +138,9 @@ function ViewPets() {
                 <progress
                   value={pet.sleepLevel}
                   max="100"
-                  style={{ width: "100%" }}
+                  style={{ 
+                    width: "100%",
+                    color: getProgressBarColor(pet.colour), }}
                 ></progress>
               </div>
 
@@ -108,7 +150,9 @@ function ViewPets() {
                 <progress
                   value={pet.combatLevel}
                   max="100"
-                  style={{ width: "100%" }}
+                  style={{ 
+                    width: "100%",
+                    color: getProgressBarColor(pet.colour), }}
                 ></progress>
                 {pet.combatLevel === 100 && (
                   <p style={{ color: "green", fontWeight: "bold" }}>

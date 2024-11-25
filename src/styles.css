@@ -25,8 +25,8 @@
     margin: 15px; /* Space between pet boxes */
     background-color: #f9f9f9; /* Light background */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    transition: transform 0.3s ease-in-out;
-}
+    transition: background-color 0.3s ease; /* Smooth transition effect */
+  }
 
 /* On hover, make the container stand out */
 .pet-container:hover {
